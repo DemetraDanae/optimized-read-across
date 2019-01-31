@@ -10,10 +10,6 @@ ScoreSum = sum(ChromScore (:,2));
 % Normalize the scores between 0 and 1
 ChromScoreNorm = [ ChromScore(:,1) , ChromScore(:,2) ./ScoreSum ];
 
-% Sort ChromScoreNorm rows by 2nd column (score), descending 
-%DEACTIVATED (save computational time)
-%ChromScoreNorm = sortrows(ChromScoreNorm ,-2);
-
 % Accumulated score
 clear ChromScoreNormAcc
 for i=1: nChrom
@@ -26,3 +22,7 @@ for i=1: nChrom
 end
 
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Developed by Gerasimos Chourdakis - 2013, 2014 %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
