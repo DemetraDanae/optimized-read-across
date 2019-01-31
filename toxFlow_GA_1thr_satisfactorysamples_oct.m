@@ -1,11 +1,12 @@
-%clear all
-pkg load statistics
+clear all
+
+%% Comment in when using Octave
+%pkg load statistics
 
 %% Import files
-data_file = 'PCF filtered by gsva.csv';
-data = dlmread(data_file,";",1,1);
-
-%rng('shuffle');
+data_file = 'file_name.csv';
+data = readtable(data_file,'Delimiter',';','ReadRowNames',true); % Comment out when using Octave
+%data = dlmread(data_file,";",1,1); % Comment in when using Octave
 
 % Attribute values (properties)
 Instances = data(1:end,2:end);     
@@ -15,22 +16,13 @@ col = 40;
 
 % Endpoint experimental values
 Labels = data(1:end,1);
-%Labels = table2array(Labels);
+Labels = table2array(Labels); %Comment out when using Octave
 
 totalInst = size(Instances ,1);
 nAttr = size(Instances ,2);
 
-%% Scaling (only attributes-not labels)
-
-% Scaling data (z-score)
-%func = @zscore;
-%Instances_sc = varfun(func,Instances);
-%Instances_sc.Properties.RowNames = Instances.Properties.RowNames;
-%Instances_sc = table2array(Instances_sc);
-
-% Scaling 0-1
-%https://www.mathworks.com/matlabcentral/answers/75568-how-can-i-normalize-data-between-0-and-1-i-want-to-use-logsig
-%Instances = table2array(Instances);
+%% Scaling 0-1
+Instances = table2array(Instances);
 for j=1:nAttr
    for i=1:totalInst
       Instances_sc(i,j) = (Instances(i,j)-min(Instances(:,j)))/(max(Instances(:,j))-min(Instances(:,j)));
@@ -49,15 +41,14 @@ col = col-flag; %New column according to reduced set
 Instances_sc = Instances_sc(:,all(~isnan(Instances_sc)));
 
 nAttr = size(Instances_sc ,2);
+
 %% Partitioning
 
 data_sc = [Labels, Instances_sc]; %Initial data normalized
 
 % LOO cross-validation
-per = round(0.66*totalInst);
-%RandStream.setGlobalStream();
-%train_data = datasample(data_sc,per,'Replace',false); %random sampling
-train_data = data_sc;%(kenstone(data_sc(:,2:end),per),:); %kennard-stones
+%per = round(0.66*totalInst);
+train_data = data_sc; %(kenstone(data_sc(:,2:end),per),:); %kennard-stones
 
 %test_data = setdiff(data_sc,train_data,'rows');
 
@@ -116,7 +107,8 @@ satSamples = round(0.3*nInst);
 %% Initial population 
 
 % Create a random initial population of chromosomes
-Chromosomes = [round(rand(nChrom ,nAttr)), rand(1,nChrom)']; %Attributes-Threshold 1 changed in Octave version
+Chromosomes = [round(rand(nChrom ,nAttr)), datasample(datasample(Dist,1),nChrom)']; %Attributes-Threshold 1 comment out when using Octave
+%Chromosomes = [round(rand(nChrom ,nAttr)), rand(1,nChrom)'];  %Comment in when using Octave
 
 for i=1:nChrom
     for j=1:nAttr
@@ -140,7 +132,8 @@ while ch <= nChrom
     [ChromScore(ch,2), predicted] = read(LocalInstances, trainL, Chromosomes(ch,nAttr+1));
     
     if ((satSamples > predicted)  || (ChromScore(ch,2) < 0.001))
-        Chromosomes(ch,:) = [round(rand(1 ,nAttr)), rand(1,1)'];
+        Chromosomes(ch,:) = [round(rand(1 ,nAttr)), datasample(datasample(Dist,1),1)]; %comment out when using Octave
+        %Chromosomes(ch,:) = [round(rand(1 ,nAttr)), rand(1,1)']; %comment in when using Octave
         for j=1:nAttr
         a = rand(1);
         if ( a>initGeneProb )
@@ -283,9 +276,6 @@ for generation =1:maxGenerations
     generation
 end
 
-% Output the last generation and scores
-%[ ChromScore , Chromosomes ]
-
 genome = bestChrom;
 
 % Test the dominant model
@@ -329,6 +319,8 @@ scatter(final(:,1),final(:,2))
 thr = genome(nAttr+1)
 
 var = sum(genome(1:nAttr))
+
+
 %% Results final
 res(1,1) = R2; %R2
 res(1,2) = 1-sum((final(:,1)-final(:,2)).^2)/sum((final(:,1)-mean(trainL)).^2); %external%q2
