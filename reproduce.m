@@ -9,5 +9,7 @@ newChrom (2,:) = [ Chromosomes(i2 ,1:point) Chromosomes(i1,point+1: nPoints) ];
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Developed by Gerasimos Chourdakis - 2013, 2014 %%%%%%%%
+%%% Developed by Gerasimos A. Chourdakis. 
+%%% Study and design of Data Mining methods and applications to Metabolomics problems. 
+%%% BS thesis. 2014 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
