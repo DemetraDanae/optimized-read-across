@@ -6,6 +6,9 @@ The repository contains the main code for the read-across optimization with one 
 
 Additional information about the employed methods and an detailed case study, can be found in the corresponding publication...
 
+# Dataset
+The proposed read-across method is demonstrated on data derived from the publication of Walkey <i>et al.</i> (2014) in the field of nanoinformatics. The dataset dataset consists of 84 gold anionic and cationic nanoparticles with known cell association with human A549 cells (toxicity index), 40 physicochemical descriptors and 129 protein corona fingerprints (PCF, biological descriptors). This dataset was used by Varsou <i>et al.</i> (2017) in the <b>toxFlow</b> web application, which performs Gene Set Variation Analysis (GSVA) of omics data coupled with read-across toxicity prediction. The GSVA on the above PCF data identified 63 proteins as statistically significant.  In the file PCF giltered by GSVA.csv contains the 40 physicochemical descriptors and the 63 proteins produced by the GSVA filtering for the 84 gold nanoparticles.  
+
 # License
 This application is released under <a href="https://www.gnu.org/licenses/gpl.html"> GNU General Public License v.3</a>. 
 ```html
