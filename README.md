@@ -23,6 +23,6 @@ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 You should have received a copy of the GNU General Public License along with this program.  
 If not, see here: http://www.gnu.org/licenses/.
 
-toxFlow  Copyright (C) 2019  Dimitra-Danai Varsou
+Copyright (C) 2019  Dimitra-Danai Varsou
 
 ```
