@@ -178,8 +178,10 @@ for generation =1:maxGenerations
         i2 = ruletteSelect(ChromScoreNormAcc);
         
         % Best chromosome between the 2 selected ones
-        bestParent = max(ChromScore(i1,:),ChromScore(i2,:));
-        bestParent = bestParent(:,1);
+        bestParent = i1;
+        if (ChromScore(i1,:)<ChromScore(i2,:))
+            bestParent = i2;
+        end
         
         % Crossover probability
         cr = rand(1);
