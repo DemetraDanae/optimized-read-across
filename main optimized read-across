@@ -179,7 +179,7 @@ for generation =1:maxGenerations
         
         % Best chromosome between the 2 selected ones
         bestParent = i1;
-        if (ChromScore(i1,:)<ChromScore(i2,:))
+        if (ChromScore(i1,2)<ChromScore(i2,2))
             bestParent = i2;
         end
         
