@@ -33,10 +33,17 @@ final = final(all(!isnan(final),2),:);
        
 MSE = 1/size(final,1)*sum((final(:,1)-final(:,2)).^2);
     
-if MSE==0 %no neighbours selected
-   score = 0;
+if MSE==NaN
+    error = 1E+10;
 else
-   score = 1/MSE;
+    error = MSE;
+end
+
+if error==1E+10 %no neighbours selected
+    score = 0;
+else
+    OF = error;
+    score = 1/(OF+10E-5);
 end
     
 finalSamples = size(final,1);
