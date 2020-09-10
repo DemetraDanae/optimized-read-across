@@ -152,6 +152,13 @@ while ch <= nChrom
             Chromosomes(ch,j) = 1;
           end
         end
+        
+        % Also check if there is at least one selected variable
+        if sum(Chromosomes(ch,1:nAttr))==0
+            randomGene = datasample(1:nAttr,1); %Make one random gene equal to 1
+            Chromosomes(ch,randomGene) = 1;
+        end
+        
     else
         ch = ch+1;
     end
@@ -219,6 +226,13 @@ for generation =1:maxGenerations
                     end % end if newChrom
                  end % end if rand(1)
              end % end for j
+             
+             % Also check if there is at least one selected variable
+            if sum(newChrom(i,1:nAttr))==0
+               randomGene = datasample(1:nAttr,1); %Make one random gene equal to 1
+               newChrom(i,randomGene) = 1;
+            end
+             
              % Mutation of threshold
              if ( rand(1)< nonUnf )
                 r = rand(1); 
@@ -323,6 +337,19 @@ final = final(all(!isnan(final),2),:);
 MSE = 1/size(final,1)*sum((final(:,1)-final(:,2)).^2);
      
 scatter(final(:,1),final(:,2))
+
+if MSE==NaN
+    error = 1E+10;
+else
+    error = MSE;
+end
+
+if error==1E+10 %no neighbours selected
+    score = 0;
+else
+    OF = error;
+    score = 1/(OF+10E-5);
+end
 
 %% Tropsha's acceptability criteria
 [verdict, R2] = tropsha(final)
