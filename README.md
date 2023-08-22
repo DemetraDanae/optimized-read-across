@@ -4,12 +4,19 @@ In the present study, an optimized read-across method for the toxicity predictio
 
 The repository contains the main code for the read-across optimization with one similarity criterion as well as the necessary functions. The presented code can be easily extended for two ore more similarity criteria. The code was developed using Matlab<sup>TM</sup> however, it is compatible with GNU Octave. In the GNU Octave version, subtle changes (marked as comments) have been made to the original code for compatibility reasons. The intereseted users can also comment in/out the commands concerning the dataset partitioning and external validation.
 
-Additional information about the employed methods and an detailed case study, can be found in the corresponding <a href=https://pubs.rsc.org/en/content/articlelanding/2019/na/c9na00242a#!divAbstract>publication</a>: Varsou <i>et al</i>. (2019), "Read-across predictions of nanoparticle hazard endpoints: a mathematical optimization approach". 
+This work is further extended and implemented as a user-friendly application (see <a href=https://apellis.jaqpot.org/>https://apellis.jaqpot.org/</a>). Docker image: <a href=https://hub.docker.com/r/demetradanae/apellis>https://hub.docker.com/r/demetradanae/apellis</a>
 
 <a href="https://zenodo.org/badge/latestdoi/168539471"><img src="https://zenodo.org/badge/168539471.svg" alt="DOI"></a>
 
 # Dataset
 The proposed read-across method is demonstrated on data derived from the publication of Walkey <i>et al.</i> (2014) in the field of nanoinformatics. The dataset dataset consists of 84 gold anionic and cationic nanoparticles with known cell association with human A549 cells (toxicity index), 40 physicochemical descriptors and 129 protein corona fingerprints (PCF, biological descriptors). This dataset was used by Varsou <i>et al.</i> (2017) in the <b>toxFlow</b> web application, which performs Gene Set Variation Analysis (GSVA) of omics data coupled with read-across toxicity prediction. The GSVA on the above PCF data identified 63 proteins as statistically significant.  In the file PCF giltered by GSVA.csv contains the 40 physicochemical descriptors and the 63 proteins produced by the GSVA filtering for the 84 gold nanoparticles.  
+
+# Cite us!
+If you find this methodology or the application useful, please cite us! :)
+
+Dimitra-Danai Varsou <i>et al</i>., "Read-across predictions of nanoparticle hazard endpoints: a mathematical optimization approach", Nanoscale Advances (2019). DOI: <a href=https://doi.org/10.1039/C9NA00242A>10.1039/C9NA00242A</a>
+
+Dimitra-Danai Varsou and Haralambos Sarimveis, "Apellis: An online tool for read-across model development", Computational Toxicology (2021). DOI: <a href=https://doi.org/10.1016/j.comtox.2020.100146>https://doi.org/10.1016/j.comtox.2020.100146</a>
 
 # License
 This application is released under <a href="https://www.gnu.org/licenses/gpl.html"> GNU General Public License v.3</a>. 
